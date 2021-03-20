@@ -1,6 +1,6 @@
 {
 "type": "FeatureCollection",
-"name": "infraestrutura_projeto",
+"name": "infraestrutura",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32723" } },
 "features": [
 { "type": "Feature", "properties": { "fid": 1, "Cod_proj": 30 }, "geometry": { "type": "Point", "coordinates": [ 763547.158511841786094, 7753490.2330331671983 ] } },
