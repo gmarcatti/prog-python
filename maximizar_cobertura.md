@@ -40,8 +40,6 @@ Computar matriz de distâncias: matriz com i linhas (pontos de infraestruturas) 
 dist_matriz = infra.geometry.apply(lambda g: antenas.distance(g))
 dist_matriz
 ```
-
-    <ipython-input-4-bbddec8a3aa7>:1: UserWarning: Geometry is in a geographic CRS. Results from 'distance' are likely incorrect. Use 'GeoSeries.to_crs()' to re-project geometries to a projected CRS before this operation.
     
       dist_matriz = infra.geometry.apply(lambda g: antenas.distance(g))
     
@@ -242,19 +240,7 @@ dist_alcance
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -431,22 +417,6 @@ dist_alcance = dist_alcance.stack().reset_index()
 dist_alcance
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
