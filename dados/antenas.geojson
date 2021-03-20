@@ -1,0 +1,16 @@
+{
+"type": "FeatureCollection",
+"name": "antenas",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32723" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "ID_antena": 1, "alcance_m": 75000.0, "cod_antena": "a1" }, "geometry": { "type": "Point", "coordinates": [ 668000.970052984775975, 7597745.098245855420828 ] } },
+{ "type": "Feature", "properties": { "fid": 2, "ID_antena": 2, "alcance_m": 52000.0, "cod_antena": "a2" }, "geometry": { "type": "Point", "coordinates": [ 853092.490829829475842, 7768147.138971013016999 ] } },
+{ "type": "Feature", "properties": { "fid": 3, "ID_antena": 3, "alcance_m": 55000.0, "cod_antena": "a3" }, "geometry": { "type": "Point", "coordinates": [ 776571.73445247602649, 7748475.283434154465795 ] } },
+{ "type": "Feature", "properties": { "fid": 4, "ID_antena": 4, "alcance_m": 60000.0, "cod_antena": "a4" }, "geometry": { "type": "Point", "coordinates": [ 750652.374885642435402, 7664003.216851379722357 ] } },
+{ "type": "Feature", "properties": { "fid": 5, "ID_antena": 5, "alcance_m": 60000.0, "cod_antena": "a5" }, "geometry": { "type": "Point", "coordinates": [ 796188.163069607806392, 7693987.779731584712863 ] } },
+{ "type": "Feature", "properties": { "fid": 6, "ID_antena": 6, "alcance_m": 40000.0, "cod_antena": "a6" }, "geometry": { "type": "Point", "coordinates": [ 699540.216978671727702, 7712888.354351744055748 ] } },
+{ "type": "Feature", "properties": { "fid": 7, "ID_antena": 7, "alcance_m": 30000.0, "cod_antena": "a7" }, "geometry": { "type": "Point", "coordinates": [ 728407.236359221162274, 7760882.408664762973785 ] } },
+{ "type": "Feature", "properties": { "fid": 8, "ID_antena": 8, "alcance_m": 50000.0, "cod_antena": "a8" }, "geometry": { "type": "Point", "coordinates": [ 593376.987212317530066, 7550383.974736329168081 ] } },
+{ "type": "Feature", "properties": { "fid": 9, "ID_antena": 9, "alcance_m": 54000.0, "cod_antena": "a9" }, "geometry": { "type": "Point", "coordinates": [ 675824.488947645528242, 7634010.778012186288834 ] } }
+]
+}
