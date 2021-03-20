@@ -21,7 +21,7 @@ Arquivos das feições espaciais, disponibilizadas nos links a seguir, no format
 
 ```python
 arq_antenas = "https://raw.githubusercontent.com/gmarcatti/prog-python/main/dados/antenas.geojson"
-arq_infra = "https://raw.githubusercontent.com/gmarcatti/prog-python/main/dados/infraestrutura_projeto.geojson"
+arq_infra = "https://raw.githubusercontent.com/gmarcatti/prog-python/main/dados/infraestrutura.geojson"
 ```
 
 Importar as feições espaciais e definir os campos `cod_antena` e `Cod_proj` como índices das respectivas tabelas
@@ -83,7 +83,7 @@ dist_alcance.groupby('cod_antena')[0].count()
 
 
 
-## 3. Solução aproximada
+## 3. Solução aproximada com herística
 
 Preparação dos dados para execução do algoritmo. Dicionário (dict) em que a chave (key) é o código das antenas e os valores (value) é um conjunto (set) com os pontos de infraestruturas alcançados por cada uma das antenas
 
@@ -126,3 +126,194 @@ while infra_nao_coberto:
     Antena: a7 ; Contribuição: 2
     Antena: a9 ; Contribuição: 1
     Antena: a8 ; Contribuição: 1
+    
+
+## 4. Solução ótima com Programação Inteira
+
+Bibliotecas necessárias
+
+
+```python
+import pulp
+```
+
+    Academic license - for non-commercial use only - expires 2021-05-06
+    Using license file C:\Users\Adm\gurobi.lic
+    No parameters matching '_test' found
+    
+
+### 4.1 Preparar origem-destino e oferta-demanda
+
+Lista com códigos de Origens (infraestruturas) e Destinos (antenas)
+
+
+```python
+origem = list(set(dist_alcance['Cod_proj']))
+destino = list(set(dist_alcance['cod_antena']))
+```
+
+Oferta nas origens. Cada origem (infraestrutura) corresponde à uma unidade. Obs: Poderiamos utilizar a quantidade de madeira em m³ ofertadas em cada unidade e maximizar a quantidade de madeira coberta pelas antenas de comunicação
+
+
+```python
+oferta = {}
+for i in range(len(dist_alcance)):
+    oferta[ dist_alcance.at[i, 'Cod_proj'] ] = 1
+```
+
+Demanda nos destinos. Cada destino (antena) é capaz de acessar uma demanda máxima (quantidade de infraestruturas) definidas pelo alcance da antena.
+
+
+```python
+demanda_max = dist_alcance.groupby('cod_antena').count()
+demanda = {}
+for i in demanda_max.index:
+    demanda[i] = demanda_max.at[i, 'Cod_proj'] 
+```
+
+### 4.2 Modelo de programação inteira
+
+Maximização da cobertura de infraestruturas pelas antenas.  
+ 
+$Max: FO = \sum \limits _{i=1} ^{o} \sum \limits _{j=1} ^{d} y _{ij} + \sum \limits _{j=1} ^{d} x _{j} \qquad origem \;(i..o): infraestrutura, \; destino \; (j..d): antena$
+<br>
+$ Sujeito \; a: $
+<br>
+$\sum \limits _{i=1} ^{o} \sum \limits _{j=1} ^{d} y _{ij} \leq D _{j} * x _{j} \qquad Demanda \; (j..D): antena$
+<br>
+$\sum \limits _{i=1} ^{o} \sum \limits _{j=1} ^{d} y _{ij} \leq O _{i} \qquad Oferta \; (i..O): infraestrutura$
+<br>
+$\sum \limits _{j=1} ^{d} x _{j} = Q \qquad destino \; (j..d): antena, \; Q: quantidade \;de \;antenas \;selecionadas$
+
+### 4.3 Definir as variáveis do modelo
+
+Variável y: determina origem (infraestrutura) para destino (antena)
+
+
+```python
+y = {}
+for i in range(len(dist_alcance)):
+    o = dist_alcance.at[i, 'Cod_proj'] 
+    d = dist_alcance.at[i, 'cod_antena'] 
+    y[o, d] = pulp.LpVariable("y_%s_PARA_%s" % (o, d), 0, 1, pulp.LpBinary)
+```
+
+Variável x: relacionada com as antenas, será útil para especificar a quantidade de antenas máximas
+
+
+```python
+x = {}
+for i in destino:
+    x[i] = pulp.LpVariable("x_%s" % i, 0, 1, pulp.LpBinary)
+```
+
+### 4.4 Criar o modelo
+
+Inicializar um novo modelo 
+
+
+```python
+m = pulp.LpProblem('Problema_do_alcance', pulp.LpMaximize)
+```
+
+Função objetivo
+
+
+```python
+obj_func = []
+for i in range(len(dist_alcance)):
+    o = dist_alcance.at[i, 'Cod_proj'] 
+    d = dist_alcance.at[i, 'cod_antena'] 
+    obj_func.append( 1 * y[o, d] )
+
+
+for i in destino:
+    obj_func.append(x[i])
+
+
+m += pulp.lpSum( obj_func)
+```
+
+Retrições de demandas
+
+
+```python
+for d in destino:
+    d_list = []
+    for o in origem:
+        if (o, d) in y:
+            d_list.append(y[o, d])
+    m += pulp.lpSum( d_list ) <= demanda[d] * x[d], "RestD_%s"%d 
+```
+
+Retrições de ofertas
+
+
+```python
+for o in origem:
+    o_list = []
+    for d in destino:
+        if (o, d) in y:
+            o_list.append(y[o, d])
+    m += pulp.lpSum( o_list ) <= oferta[o], "RestO_%s"%o 
+
+m += pulp.lpSum( x ) == 2, "RestAntenas" 
+```
+
+### 4.5 Resolver o problema
+
+Solver com cbc (Coin-or branch and cut) disponibilizado em pulp
+
+
+```python
+m.solve(pulp.PULP_CBC_CMD())
+print("Status: " + pulp.LpStatus[m.status])
+print("Otimo (máximo): " + str(pulp.value(m.objective))) 
+```
+
+    Status: Optimal
+    Otimo (máximo): 78.0
+    
+
+### 4.6 Capturar resultados da solução do modelo
+
+
+```python
+resul_name = []
+resul_value = []
+for v in m.variables()[len(x):]:
+    #if v.varValue >= 0.1:
+    resul_name.append(v.name)
+    resul_value.append(v.varValue)
+
+oferta_x_demanda = []
+for i, var in enumerate(resul_name): #[9:]
+    o, d = var.replace('y_', '').split('_PARA_')
+    oferta_x_demanda.append([o, d, resul_value[i]]) # [9:]
+
+
+resul = pd.DataFrame(oferta_x_demanda, columns=['Cod_proj', 'cod_antena', 'Atribuicao'])
+```
+
+### 4.7 Imprimir resultados 
+
+
+```python
+resumo = resul.groupby(['cod_antena'])['Atribuicao'].sum()
+print("Resumo:", resumo)
+print("Cobertura total:", resumo.sum())
+```
+
+    Resumo: cod_antena
+    `a1    44.0`
+    a2     0.0
+    `a3    32.0`
+    a4     0.0
+    a5     0.0
+    a6     0.0
+    a7     0.0
+    a8     0.0
+    a9     0.0
+    Name: Atribuicao, dtype: float64
+    Cobertura total: 76.0
+    
