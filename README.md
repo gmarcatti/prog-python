@@ -305,9 +305,9 @@ print("Cobertura total:", resumo.sum())
 ```
 
     Resumo: cod_antena
-    `a1    44.0`
+    a1    44.0
     a2     0.0
-    `a3    32.0`
+    a3    32.0
     a4     0.0
     a5     0.0
     a6     0.0
