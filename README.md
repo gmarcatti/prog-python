@@ -2,9 +2,9 @@
 Procedimentos apresentados na disciplina de Algoritmos e programação computacional no Python
 
 [Semana 08 - Estruturas de dados no Python](#Semana-08-Estruturas-de-dados-no-Python)
-- [Código aula](# Código aula)
-  - [Parte 1](## Parte 1)
-- [Exercícios](# Exercícios)
+- [Código aula](#Código-aula)
+  - [Parte 1](##Parte-1)
+- [Exercícios](#Exercícios)
   - [O Problema de maximizar a cobertura (Localização - Alocação)](## O Problema de maximizar a cobertura (Localização - Alocação))
     - [1. Importar dados](## 1. Importar dados)
     - [2. Pre-processamento](## 2. Pre-processamento)
