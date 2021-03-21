@@ -2,14 +2,14 @@
 Procedimentos apresentados na disciplina de Algoritmos e programação computacional no Python
 
 [Semana 08 - Estruturas de dados no Python](#Semana-08---Estruturas-de-dados-no-Python)
-- [Código aula](#Código-aula)
-  - [Parte 1](#Parte-1)
-- [Exercícios](#Exercícios)
-  - [O Problema de maximizar a cobertura (Localização - Alocação)](#O-Problema-de-maximizar-a-cobertura-Localização---Alocação)
-    - [1. Importar dados](#1-Importar-dados)
-    - [2. Pre-processamento](#2-Pre-processamento)
-    - [3. Solução aproximada com herística](#3-Solução-aproximada-com-herística)
-    - [4. Solução ótima com Programação Inteira](#4-Solução-ótima-com-Programação-Inteira)
+[Código aula](#Código-aula)
+- [Parte 1](#Parte-1)
+[Exercícios](#Exercícios)
+- [O Problema de maximizar a cobertura (Localização - Alocação)](#O-Problema-de-maximizar-a-cobertura-Localização---Alocação)
+  - [1. Importar dados](#1-Importar-dados)
+  - [2. Pre-processamento](#2-Pre-processamento)
+  - [3. Solução aproximada com herística](#3-Solução-aproximada-com-herística)
+  - [4. Solução ótima com Programação Inteira](#4-Solução-ótima-com-Programação-Inteira)
 
 
 # Semana 08 - Estruturas de dados no Python
@@ -195,7 +195,7 @@ for i in demanda_max.index:
 
 ### 4.2 Modelo de programação inteira
 
-Maximização da cobertura de infraestruturas pelas antenas.  
+Função Objetivo (FO): Maximização da cobertura de infraestruturas pelas antenas, sujeito às restrições: (1) cada antena apresenta uma quantidade máxima de acesso de pontos de infraestrutura (restrições de demanda); (2) cada ponto de infraestrutura só deve ser acessado por uma única antena (restrições de ofertas); (3) A quantidade de antenas selecionadas deverá ser igual a quantidade previamente estabelecida (igual a 2 neste caso).  
 
 ![alt text](https://raw.githubusercontent.com/gmarcatti/prog-python/main/img/modelo_equacao.PNG)
 
@@ -212,7 +212,7 @@ for i in range(len(dist_alcance)):
     y[o, d] = pulp.LpVariable("y_%s_PARA_%s" % (o, d), 0, 1, pulp.LpBinary)
 ```
 
-Variável x: relacionada com as antenas, será útil para especificar a quantidade de antenas máximas
+Variável x: relacionada com as antenas, será útil para especificar a quantidade de antenas desejadas
 
 
 ```python
@@ -223,7 +223,7 @@ for i in destino:
 
 ### 4.4 Criar o modelo
 
-Inicializar um novo modelo 
+Inicializar um novo modelo de maximização utilizando a biblioteca pulp (para gerar modelos de programação linear, inteira e mista) do Python
 
 
 ```python
@@ -309,7 +309,7 @@ for i, var in enumerate(resul_name): #[9:]
 resul = pd.DataFrame(oferta_x_demanda, columns=['Cod_proj', 'cod_antena', 'Atribuicao'])
 ```
 
-### 4.7 Imprimir resultados 
+### 4.7 Imprimir resultados na tela
 
 
 ```python
