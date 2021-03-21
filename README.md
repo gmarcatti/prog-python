@@ -1,7 +1,7 @@
 # prog-python
 Procedimentos apresentados na disciplina de Algoritmos e programação computacional no Python
 
-[Semana 08 - Estruturas de dados no Python](#Semana-08-Estruturas-de-dados-no-Python)
+[Semana 08 - Estruturas de dados no Python](#Semana-08---Estruturas-de-dados-no-Python)
 - [Código aula](#Código-aula)
   - [Parte 1](##Parte-1)
 - [Exercícios](#Exercícios)
