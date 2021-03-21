@@ -1,7 +1,24 @@
 # prog-python
 Procedimentos apresentados na disciplina de Algoritmos e programação computacional no Python
 
-# Semana 08 - Exercício: O Problema de maximizar a cobertura (Localização - Alocação)
+[Semana 08 - Estruturas de dados no Python](# Semana 08 - Estruturas de dados no Python)
+- [Código aula](# Código aula)
+  - [Parte 1](## Parte 1)
+- [Exercícios](# Exercícios)
+  - [O Problema de maximizar a cobertura (Localização - Alocação)](## O Problema de maximizar a cobertura (Localização - Alocação))
+    - [1. Importar dados](## 1. Importar dados)
+    - [2. Pre-processamento](## 2. Pre-processamento)
+    - [3. Solução aproximada com herística](## 3. Solução aproximada com herística)
+    - [4. Solução ótima com Programação Inteira](## 4. Solução ótima com Programação Inteira)
+
+
+# Semana 08 - Estruturas de dados no Python
+
+# Código aula
+## Parte 1
+
+# Exercícios
+## O Problema de maximizar a cobertura (Localização - Alocação)
 
 Autor: Gustavo Eduardo Marcatti  
 20 de março de 2021
