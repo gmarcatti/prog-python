@@ -6,6 +6,11 @@ Procedimentos apresentados na disciplina de Algoritmos e programação computaci
 Autor: Gustavo Eduardo Marcatti  
 20 de março de 2021
 
+Dentre as 9 possibilidades viáveis de alocação de antenas de comunicação, apenas as duas melhores deverão ser construidas. Quais são as duas melhores?  
+Resposta: antenas que maximizam a cobertura de pontos de infraestrutura.
+O objetivo do problema é `maximizar` a `cobertura` de pontos de `infraestrutura` de projetos florestais por uma quantidade fixa, previamente estabelecida, de `antenas` de comunicação. Algumas restrições devem ser estabelecidas: (1) cada antena apresenta uma quantidade máxima de acesso de pontos de infraestrutura, quantidade determinada pela distância infraestrutura-antena e alcance máximo da antena (m); (2) cada ponto de infraestrutura só deve ser acessado por uma única antena (o ponto deve estar dentro do raio máximo de alcance da antena selecionada); (3)   
+![alt text](https://raw.githubusercontent.com/gmarcatti/prog-python/main/img/fig_geral.PNG)
+
 Bibliotecas necessárias
 
 
