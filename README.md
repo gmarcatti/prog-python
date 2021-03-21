@@ -174,16 +174,8 @@ for i in demanda_max.index:
 ### 4.2 Modelo de programação inteira
 
 Maximização da cobertura de infraestruturas pelas antenas.  
- 
-$Max: FO = \sum \limits _{i=1} ^{o} \sum \limits _{j=1} ^{d} y _{ij} + \sum \limits _{j=1} ^{d} x _{j} \qquad origem \;(i..o): infraestrutura, \; destino \; (j..d): antena$
-<br>
-$ Sujeito \; a: $
-<br>
-$\sum \limits _{i=1} ^{o} \sum \limits _{j=1} ^{d} y _{ij} \leq D _{j} * x _{j} \qquad Demanda \; (j..D): antena$
-<br>
-$\sum \limits _{i=1} ^{o} \sum \limits _{j=1} ^{d} y _{ij} \leq O _{i} \qquad Oferta \; (i..O): infraestrutura$
-<br>
-$\sum \limits _{j=1} ^{d} x _{j} = Q \qquad destino \; (j..d): antena, \; Q: quantidade \;de \;antenas \;selecionadas$
+
+![alt text](https://raw.githubusercontent.com/gmarcatti/prog-python/main/img/modelo_equacao.PNG)
 
 ### 4.3 Definir as variáveis do modelo
 
