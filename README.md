@@ -5,7 +5,7 @@ Procedimentos apresentados na disciplina de Algoritmos e programação computaci
 - [Código aula](#Código-aula)
   - [Parte 1](#Parte-1)
 - [Exercícios](#Exercícios)
-  - [O Problema de maximizar a cobertura (Localização - Alocação)](#O-Problema-de-maximizar-a-cobertura-(Localização---Alocação))
+  - [O Problema de maximizar a cobertura (Localização - Alocação)](#O-Problema-de-maximizar-a-cobertura-Localização---Alocação)
     - [1. Importar dados](#1-Importar-dados)
     - [2. Pre-processamento](#2-Pre-processamento)
     - [3. Solução aproximada com herística](#3-Solução-aproximada-com-herística)
