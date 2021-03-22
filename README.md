@@ -159,12 +159,7 @@ Bibliotecas necessárias
 
 ```python
 import pulp
-```
-
-    Academic license - for non-commercial use only - expires 2021-05-06
-    Using license file C:\Users\Adm\gurobi.lic
-    No parameters matching '_test' found
-    
+```    
 
 ### 4.1 Preparar origem-destino e oferta-demanda
 
@@ -250,7 +245,7 @@ for i in destino:
 m += pulp.lpSum( obj_func)
 ```
 
-Retrições de demandas
+Restrições de demandas
 
 
 ```python
@@ -262,7 +257,7 @@ for d in destino:
     m += pulp.lpSum( d_list ) <= demanda[d] * x[d], "RestD_%s"%d 
 ```
 
-Retrições de ofertas
+Restrições de ofertas
 
 
 ```python
@@ -284,7 +279,7 @@ Solver com cbc (Coin-or branch and cut) disponibilizado em pulp
 ```python
 m.solve(pulp.PULP_CBC_CMD())
 print("Status: " + pulp.LpStatus[m.status])
-print("Otimo (máximo): " + str(pulp.value(m.objective))) 
+print("Ótimo (máximo): " + str(pulp.value(m.objective))) 
 ```
 
     Status: Optimal
