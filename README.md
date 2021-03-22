@@ -1,25 +1,171 @@
 # prog-python
 Procedimentos apresentados na disciplina de Algoritmos e programação computacional no Python
 
+[Semana 02 - Variáveis e Funções no Python](#Semana-02---Variáveis-e-Funções-no-Python)
+
 [Semana 08 - Estruturas de dados no Python](#Semana-08---Estruturas-de-dados-no-Python)
 
-[Código aula](#Código-aula)
+---
+
+# Semana 02 - Variáveis e Funções no Python
+
+[Código aula](#Código-aula-02)
+- [1. Operações básicas](##1.-Operações-básicas)
+- [2. Imprimir na tela](##2.-Imprimir-na-tela)
+- [3. Executar funções](##3.-Executar-funções)
+- [4. Criar variáveis](##4.-Criar-variáveis)
+- [5. Criar funções](##5.-Criar-funções)
+
+
+[Exercícios](#Exercícios-02)
+
+
+# Código aula 02
+
+## 1. Operações básicas
+
+```python
+a = 2
+b = 3
+a + b
+a * b
+```
+
+## 2. Imprimir na tela
+
+```python
+a + b
+print(a + b)
+
+print("Seja bem vindo!")
+```
+
+## 3. Executar funções
+
+```python
+import math
+math.log(2)
+math.log(2, 3)
+math.log(2)
+math.log(2, math.e)
+# math.log(, math.e) # erro
+```
+
+## 4. Criar variáveis
+
+```python
+log_valor = math.log(2)
+resultado_final = log_valor * 45.1
+resultado_final
+print(resultado_final)
+
+obj1 = math.sqrt(25)
+obj2 = math.sqrt(12)
+
+nome = "Eduardo"
+```
+
+
+## 5. Criar funções
+
+## Exemplo de boas vindas
+
+`1: Sem argumentos e sem retorno`
+```python
+def boas_vindas1():
+    print("Seja bem vindo!")
+
+boas_vindas1()
+```
+
+`2: Com argumento`
+```python
+def boas_vindas2(nome):
+    print("Seja bem vindo", nome, "!")
+
+boas_vindas2("Fulano")
+```
+`3: Com argumento padrão`
+```python
+def boas_vindas3(nome = "aluno"):
+    print("Seja bem vindo", nome, "!")
+
+boas_vindas3()
+boas_vindas3("Fulano")
+```
+
+## Exemplo análise econômica de projetos 
+
+`4: Com retorno`
+
+> Com repetição de código. Indesejável, pois é necessário muito código repetido
+
+```python
+# Proj1
+receita = 6000
+custo = 4000
+lucro = receita - custo
+print(lucro)
+
+# Proj2
+receita = 9000
+custo = 5000
+lucro = receita - custo
+print(lucro)
+
+# Proj3
+receita = 6000
+custo = 6500
+lucro = receita - custo
+print(lucro)
+```
+
+> Com função! Ideal, pois evita códigos repetidos e assim facilita o ato de programar, revisar e manter o código, além de minimizar as possibilidades de erro
+```python
+def aval_eco(receita, custo):
+    lucro = receita - custo
+    return(lucro)
+    
+proj1 = aval_eco(6000, 4000)
+proj2 = aval_eco(9000, 5000)
+proj3 = aval_eco(6000, 6500)
+
+lucro_geral = proj1 + proj2 + proj3
+lucro_geral
+```
+
+Bloco de execução inicializado com ` : ` e encerrado com o fim da indentação
+
+```python
+def funcao():
+    a = 3
+    b = 3
+    cv = a * b
+    return(cv)
+
+funcao()
+```
+
+# Exercícios 02
+---
+
+
+# Semana 08 - Estruturas de dados no Python
+
+[Código aula](#Código-aula-08)
 - [Parte 1](#Parte-1)
 
-[Exercícios](#Exercícios)
+[Exercícios](#Exercícios-08)
 - [O Problema de maximizar a cobertura (Localização - Alocação)](#O-Problema-de-maximizar-a-cobertura-Localização---Alocação)
   - [1. Importar dados](#1-Importar-dados)
   - [2. Pre-processamento](#2-Pre-processamento)
   - [3. Solução aproximada com herística](#3-Solução-aproximada-com-herística)
   - [4. Solução ótima com Programação Inteira](#4-Solução-ótima-com-Programação-Inteira)
 
-
-# Semana 08 - Estruturas de dados no Python
-
-# Código aula
+# Código aula 08
 ## Parte 1
 
-# Exercícios
+# Exercícios 08
 ## O Problema de maximizar a cobertura (Localização - Alocação)
 
 Autor: Gustavo Eduardo Marcatti  
