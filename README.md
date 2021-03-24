@@ -3,7 +3,9 @@ Procedimentos apresentados na disciplina de Algoritmos e programação computaci
 
 [Semana 02 - Variáveis e Funções no Python](#Semana-02---Variáveis-e-Funções-no-Python)
 
+
 [Semana 03 - Condicionais no Python: Operadores e Sinais](#Semana-03---Condicionais-no-Python:-Operadores-e-Sinais)
+
 
 [Semana 08 - Estruturas de dados no Python](#Semana-08---Estruturas-de-dados-no-Python)
 
@@ -164,7 +166,6 @@ funcao()
 
 # Semana 03 - Condicionais no Python: Operadores e Sinais
 
-# Semana 03 - Condicionais no Python: Operadores e Sinais
 [Código aula](#Código-aula-03)
 - [Exemplo 1: Avaliação econômica](##Exemplo-1:-Avaliação-econômica)
   - [1. Condicional if](#1-Condicional-if)
