@@ -162,7 +162,6 @@ funcao()
 <!-- Semana 03 - Condicionais no Python: Operadores e Sinais  -->
 <!-- ------------------------------------------------------------ -->
 
-
 # Semana 03 - Condicionais no Python: Operadores e Sinais
 [Código aula](#Código-aula-03)
 - [Exemplo 1: Avaliação econômica](##Exemplo-1:-Avaliação-econômica)
