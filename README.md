@@ -26,7 +26,7 @@ Procedimentos apresentados na disciplina de Algoritmos e programação computaci
 
 # Semana 02 - Variáveis e Funções no Python
 
-[:arrow_left:](#Índice) [:arrow_up:](#Índice) [:arrow_right:](#Semana-03---Condicionais-no-Python---Operadores-e-Sinais)
+[:arrow_left:](#Índice) &nbsp; &nbsp; &nbsp; &nbsp; [:arrow_up:](#Índice) &nbsp; &nbsp; &nbsp; &nbsp; [:arrow_right:](#Semana-03---Condicionais-no-Python---Operadores-e-Sinais)
 
 **Neste tópico você irá aprender a executar operações matemáticas básicas, criar variáveis, executar e criar suas próprias funções.**
 
@@ -183,7 +183,7 @@ funcao()
 
 # Semana 03 - Condicionais no Python - Operadores e Sinais
 
-[:arrow_left:](#Semana-02---Variáveis-e-Funções-no-Python) [:arrow_up:](#Índice) [:arrow_right:](#Semana-04---Condicionais-no-Python---Lógicas-e-Aninhamento)
+[:arrow_left:](#Semana-02---Variáveis-e-Funções-no-Python) &nbsp; &nbsp; &nbsp; &nbsp; [:arrow_up:](#Índice) &nbsp; &nbsp; &nbsp; &nbsp; [:arrow_right:](#Semana-04---Condicionais-no-Python---Lógicas-e-Aninhamento)
 
 **Você irá aprender sobre os operadores condicionais e operadores de comparação. O primeiro corresponde à estrutura geral das operações de condição (Ex: if...else), já o segundo trata dos sinais utilizados para construir as operações de condição (Ex: > maior que, != diferente).**
 
@@ -312,7 +312,7 @@ exp_area(11000, 5000, 200)
 <!-- ------------------------------------------------------------ -->
 # Semana 04 - Condicionais no Python - Lógicas e Aninhamento
 
-[:arrow_left:](#Semana-03---Condicionais-no-Python---Operadores-e-Sinais) [:arrow_up:](#Índice) [:arrow_right:](#Semana-08---Estruturas-de-dados-no-Python)
+[:arrow_left:](#Semana-03---Condicionais-no-Python---Operadores-e-Sinais) &nbsp; &nbsp; &nbsp; &nbsp; [:arrow_up:](#Índice) &nbsp; &nbsp; &nbsp; &nbsp; [:arrow_right:](#Semana-08---Estruturas-de-dados-no-Python)
 
 
 **Você irá aprender sobre os operadores lógicos, os representantes principais são o `ou` e `e`, representados pelas palavras reservadas `or` e `and`, ou então pelos símbolos `|` e `&`, respectivamente. Você também será apresentado aos condicionais aninhados, que podem ser utilizados para substituir um operador lógico. Um condicional aninhado, é basicamente, um operador condicional dentro do outro.**
@@ -460,7 +460,7 @@ Obs: Os processos de repetição em loop serão ensinado no próximo tema
 
 # Semana 08 - Estruturas de dados no Python
 
-[:arrow_left:](#Semana-04---Condicionais-no-Python---Lógicas-e-Aninhamento) [:arrow_up:](#Índice) [:arrow_right:](#Índice)
+[:arrow_left:](#Semana-04---Condicionais-no-Python---Lógicas-e-Aninhamento) &nbsp; &nbsp; &nbsp; &nbsp; [:arrow_up:](#Índice) &nbsp; &nbsp; &nbsp; &nbsp; [:arrow_right:](#Índice)
 
 
 [Código aula](#Código-aula-08)
