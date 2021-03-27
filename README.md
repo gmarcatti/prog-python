@@ -28,6 +28,12 @@ Procedimentos apresentados na disciplina de Algoritmos e programação computaci
 
 [:arrow_left:](#Índice) [:arrow_up:](#Índice) [:arrow_right:](#Semana-03---Condicionais-no-Python---Operadores-e-Sinais)
 
+**Você irá aprender sobre os operadores condicionais e operadores de comparação. O primeiro corresponde à estrutura geral das operações de condição (Ex: if...else), já o segundo trata dos sinais utilizados para construir as operações de condição (Ex: > maior que, != diferente).**
+
+Para você dizer em algum momento que sabe programar será necessário dominar dois tópicos básicos: operações condicionais e operações de repetição. Ambos são operações de controle de fluxo e são consideradas essenciais para programar qualquer procedimento, por mais simples que seja.
+
+<ins>As operações condicionais estão relacionadas com tomada de decisão entre diferentes alternativas, isto é, escolha de uma opção entre duas ou mais possibilidades</ins>. Para ser capaz de compreender as operações condicionais é necessário entender pelo menos 4 temas: os operadores condicionais (neste tópico), operadores de comparação (neste tópico), operadores lógicos (tópico seguinte) e operadores condicionais aninhados (tópico seguinte).
+
 [Código aula](#Código-aula-02)
 - [1. Operações básicas](#1-Operações-básicas)
 - [2. Imprimir na tela](#2-Imprimir-na-tela)
@@ -313,7 +319,7 @@ exp_area(11000, 5000, 200)
 
 Determinar se a área é prioritária para recuperação ambiental, de acordo com os critérios a seguir:
 >1: área de solo exposto acima 5% do total
-
+>
 >2: área contínua de solo exposto acima 5 ha
 
 Importar as bibliotecas necessárias
