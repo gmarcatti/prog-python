@@ -4,7 +4,7 @@ Procedimentos apresentados na disciplina de Algoritmos e programação computaci
 [Semana 02 - Variáveis e Funções no Python](#Semana-02---Variáveis-e-Funções-no-Python)
 
 
-[Semana 03 - Condicionais no Python: Operadores e Sinais](#Semana-03---Condicionais-no-Python:-Operadores-e-Sinais)
+[Semana 03 - Condicionais no Python - Operadores e Sinais](#Semana-03---Condicionais-no-Python---Operadores-e-Sinais)
 
 
 [Semana 08 - Estruturas de dados no Python](#Semana-08---Estruturas-de-dados-no-Python)
@@ -164,21 +164,21 @@ funcao()
 <!-- Semana 03 - Condicionais no Python: Operadores e Sinais  -->
 <!-- ------------------------------------------------------------ -->
 
-# Semana 03 - Condicionais no Python: Operadores e Sinais
+# Semana 03 - Condicionais no Python - Operadores e Sinais
 
 [Código aula](#Código-aula-03)
-- [Exemplo 1: Avaliação econômica](##Exemplo-1:-Avaliação-econômica)
+- [Exemplo 1 - Avaliação econômica](##Exemplo-1---Avaliação-econômica)
   - [1. Condicional if](#1-Condicional-if)
   - [2. Condicional if-else](#2-Condicional-if-else)
   - [3. Condicional if-elif-else](#3-Condicional-if-elif-else)
-- [Exemplo 2: Decisão de expansão de área](##Exemplo-2:-Decisão-de-expansão-de-área)
+- [Exemplo 2 - Decisão de expansão de área](##Exemplo-2 --Decisão-de-expansão-de-área)
 
 
 [Exercícios](#Exercícios-03)
 
 # Código aula 03
 
-## Exemplo 1: Avaliação econômica
+## Exemplo 1 - Avaliação econômica
 
 ### 1. Condicional if
 ```python
@@ -233,7 +233,7 @@ print("Total R$", proj1 + proj2 +proj3)
 ```
 
 
-## Exemplo 2: Decisão de expansão de área
+## Exemplo 2 - Decisão de expansão de área
 ```python
 receita = 14000
 custo = 6000
