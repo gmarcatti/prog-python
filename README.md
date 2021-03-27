@@ -7,9 +7,15 @@ Procedimentos apresentados na disciplina de Algoritmos e programação computaci
 [Semana 03 - Condicionais no Python - Operadores e Sinais](#Semana-03---Condicionais-no-Python---Operadores-e-Sinais)
 
 
+
+[Semana 04 - Operações Condicionais - Lógicas e Aninhamento](#Semana-04---Operações-Condicionais---Lógicas-e-Aninhamento)
+
+
+
 [Semana 08 - Estruturas de dados no Python](#Semana-08---Estruturas-de-dados-no-Python)
 
 ---
+
 
 <!-- ------------------------------------------------------------ -->
 <!-- Semana 02 - Variáveis e Funções no Python  -->
@@ -17,6 +23,8 @@ Procedimentos apresentados na disciplina de Algoritmos e programação computaci
 
 
 # Semana 02 - Variáveis e Funções no Python
+
+
 
 [Código aula](#Código-aula-02)
 - [1. Operações básicas](#1-Operações-básicas)
@@ -283,7 +291,142 @@ exp_area(11000, 5000, 200)
 
 ---
 
+<!-- ------------------------------------------------------------ -->
+<!-- Semana 04 - Operações Condicionais - Lógicas e Aninhamento  -->
+<!-- ------------------------------------------------------------ -->
+# Semana 04 - Operações Condicionais - Lógicas e Aninhamento
 
+[Código aula](#Código-aula-03)
+- [Exemplo 1 - Área prioritária](#Exemplo-1---Área-prioritária)
+  - [1. Solução simplificada](#1-Solução-simplificada)
+  - [2. Solução completa](#2-Solução-completa)
+- [Exemplo 2 - Condicional aninhado](#Exemplo-2---Condicional-aninhado)
+
+# Exemplo 1 - Área prioritária
+
+Determinar se a área é prioritária para recuperação ambiental, de acordo com os critérios a seguir:
+>1: área de solo exposto acima 5% do total
+
+>2: área contínua de solo exposto acima 5 ha
+
+Importar as bibliotecas necessárias
+```python
+from osgeo import gdal # importar raster
+import numpy as np # operações com dados no formato matricial
+from scipy.ndimage import label # identificar grupos isolados
+import matplotlib.pyplot as plt # plotar dados
+```
+## 1. Solução simplificada
+Solução em que as medidas de porcentagem de solo exposto `solo_porc` e quantidade de área contínua de solo exposto `solo_cont` são fornecidas
+```python
+solo_porc = 10 # porcentagem
+solo_cont = 3 # hectares
+```
+
+Condicional com o operador lógico or (ou) para determinar se a área deve ser considerada prioritária ou não
+```python
+if solo_porc > 5 or solo_cont > 5:
+    print("********* Prioritária *********")
+else:
+    print("--- Não prioritária ---")
+```
+
+## 2. Solução completa
+Na solução completa as medidas de porcentagem de solo exposto `solo_porc` e quantidade de área contínua de solo exposto `solo_cont` são obtidas de forma automática utilizando operações matriciais básicas  
+<br/>
+Os dados podem ser acessados aqui https://gmarcatti.github.io/dados/uso_terra.tif
+<br/>
+> 1 - Importar o raster com os dados de uso e ocupação da terra
+```python  
+uso_terra = r"C:\dados\espacial\uso_terra.tif"
+```
+Obs: alterar o caminho acima de acordo com o caminho dos dados em seu computador após o download
+
+```python  
+uso_raster = gdal.Open(uso_terra)
+banda = uso_raster.GetRasterBand(1)
+uso_matriz = banda.ReadAsArray()
+
+uso_matriz[uso_matriz <= 0] = 0 # atribuir 0 nos valores nodata
+plt.imshow(uso_matriz) # plotar os dados
+```
+> 2 - Área de solo exposto acima 5% do total
+
+```python 
+v_uso, cont_uso = np.unique(uso_matriz, return_counts = True)
+cont_uso = cont_uso[1:]
+porc_uso = 100 * cont_uso / cont_uso.sum()
+porc_solo = porc_uso[2]
+```
+> 3 - Área contínua de solo exposto acima 5 ha
+```python 
+solo_matriz = uso_matriz == 3
+plt.imshow(solo_matriz)
+
+solo_label, num_label = label(solo_matriz)
+plt.imshow(solo_label)
+
+v_solo, cont_solo = np.unique(solo_label, return_counts = True)
+cont_solo = cont_solo[1:]
+area_pixel = 40 * 40
+
+solo_cont = cont_solo * area_pixel / 10000
+solo_cont_max = solo_cont.max()
+```
+
+> 4 - Decisão
+```python 
+if porc_solo > 5 or solo_cont_max > 5:
+    print("***** Prioritária ******")
+else:
+    print("--- Não prioritária ---")
+```
+
+# Exemplo 2 - Condicional aninhado
+
+Definir ação controle de acordo com nível de infestação de uma praga
+
+> 1 - Criar função
+
+```python 
+def controle(nivel):
+    if nivel <= 2:
+        print("Não mudar nada no programa atual")
+    elif nivel > 2 and nivel <= 4:
+        print("Intensificar a amostragem")
+        if nivel > 2 and nivel <= 3:
+            print("Repetir de 4 em 4 dias")
+        elif nivel > 3 and nivel <= 3.5:
+            print("Repetir de 2 em 2 dias")
+        elif nivel > 3.5 and nivel < 4:
+            print("Repetir todos os dias")
+    elif nivel > 4 and nivel <= 20:
+        print("AÇÃO: tentar controlar")
+    else:
+        print("Não adianta fazer mais nada...")
+```
+
+> 2 - Aplicar a função
+```python 
+controle(1.5)
+controle(2.5)
+controle(3.1)
+controle(3.9)
+controle(5.2)
+controle(22.7)
+```
+
+> 3 - Aplicar a função em um loop
+```python 
+niveis = [1.5, 2.5, 3.1, 3.9, 5.2, 22.7]
+for nivel in niveis:
+    print("------------------")
+    print("Para o nivel:", nivel)
+    controle(nivel)
+```
+Obs: Os processos de repetição em loop serão ensinado no próximo tema
+
+---
 
 <!-- ------------------------------------------------------------ -->
 <!-- Semana 08 - Estruturas de dados no Python  -->
