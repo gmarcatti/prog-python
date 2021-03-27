@@ -1,18 +1,19 @@
 # prog-python
 Procedimentos apresentados na disciplina de Algoritmos e programação computacional no Python
 
+# Índice
+
 [Semana 02 - Variáveis e Funções no Python](#Semana-02---Variáveis-e-Funções-no-Python)
 
 
 [Semana 03 - Condicionais no Python - Operadores e Sinais](#Semana-03---Condicionais-no-Python---Operadores-e-Sinais)
 
 
-
-[Semana 04 - Operações Condicionais - Lógicas e Aninhamento](#Semana-04---Operações-Condicionais---Lógicas-e-Aninhamento)
-
-
+[Semana 04 - Condicionais no Python - Lógicas e Aninhamento](#Semana-04---Condicionais-no-Python---Lógicas-e-Aninhamento)
 
 [Semana 08 - Estruturas de dados no Python](#Semana-08---Estruturas-de-dados-no-Python)
+
+
 
 ---
 
@@ -22,9 +23,10 @@ Procedimentos apresentados na disciplina de Algoritmos e programação computaci
 <!-- ------------------------------------------------------------ -->
 
 
+
 # Semana 02 - Variáveis e Funções no Python
 
-
+[:arrow_left:](#Índice) [:arrow_up:](#Índice) [:arrow_right:](#Semana-03---Condicionais-no-Python---Operadores-e-Sinais)
 
 [Código aula](#Código-aula-02)
 - [1. Operações básicas](#1-Operações-básicas)
@@ -174,6 +176,8 @@ funcao()
 
 # Semana 03 - Condicionais no Python - Operadores e Sinais
 
+[:arrow_left:](#Semana-02---Variáveis-e-Funções-no-Python) [:arrow_up:](#Índice) [:arrow_right:](#Semana-04---Condicionais-no-Python---Lógicas-e-Aninhamento)
+
 [Código aula](#Código-aula-03)
 - [Exemplo 1 - Avaliação econômica](#Exemplo-1---Avaliação-econômica)
   - [1. Condicional if](#1-Condicional-if)
@@ -294,7 +298,10 @@ exp_area(11000, 5000, 200)
 <!-- ------------------------------------------------------------ -->
 <!-- Semana 04 - Operações Condicionais - Lógicas e Aninhamento  -->
 <!-- ------------------------------------------------------------ -->
-# Semana 04 - Operações Condicionais - Lógicas e Aninhamento
+# Semana 04 - Condicionais no Python - Lógicas e Aninhamento
+
+[:arrow_left:](#Semana-03---Condicionais-no-Python---Operadores-e-Sinais) [:arrow_up:](#Índice) [:arrow_right:](#Semana-08---Estruturas-de-dados-no-Python)
+
 
 [Código aula](#Código-aula-03)
 - [Exemplo 1 - Área prioritária](#Exemplo-1---Área-prioritária)
@@ -433,6 +440,9 @@ Obs: Os processos de repetição em loop serão ensinado no próximo tema
 <!-- ------------------------------------------------------------ -->
 
 # Semana 08 - Estruturas de dados no Python
+
+[:arrow_left:](#Semana-04---Condicionais-no-Python---Lógicas-e-Aninhamento) [:arrow_up:](#Índice) [:arrow_right:](#Índice)
+
 
 [Código aula](#Código-aula-08)
 - [Parte 1](#Parte-1)
