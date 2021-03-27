@@ -19,11 +19,11 @@ Procedimentos apresentados na disciplina de Algoritmos e programação computaci
 # Semana 02 - Variáveis e Funções no Python
 
 [Código aula](#Código-aula-02)
-- [1. Operações básicas](#1.-Operações-básicas)
-- [2. Imprimir na tela](#2.-Imprimir-na-tela)
-- [3. Executar funções](#3.-Executar-funções)
-- [4. Criar variáveis](#4.-Criar-variáveis)
-- [5. Criar funções](#5.-Criar-funções)
+- [1. Operações básicas](#1-Operações-básicas)
+- [2. Imprimir na tela](#2-Imprimir-na-tela)
+- [3. Executar funções](#3-Executar-funções)
+- [4. Criar variáveis](#4-Criar-variáveis)
+- [5. Criar funções](#5-Criar-funções)
 
 
 [Exercícios](#Exercícios-02)
