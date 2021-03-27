@@ -34,9 +34,9 @@ O tempo todo no Python é necessário criar novas variáveis, elas serão úteis
 
 Uma das maiores potencialidades do Python é que ele permite ao usuário definir suas próprias funções de forma simples e fácil. Isso o torna uma ferramenta poderosa para criar e testar novas metodologias. No Python as funções apresentam papel de destaque, pois é uma das principais formas de interagir com as rotinas nativas da linguagem.
 
-
+<section class="video">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Ju9LA8X5zyc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+</section>
 
 [Código aula](#Código-aula-02)
 - [1. Operações básicas](#1-Operações-básicas)
