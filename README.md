@@ -19,11 +19,11 @@ Procedimentos apresentados na disciplina de Algoritmos e programação computaci
 # Semana 02 - Variáveis e Funções no Python
 
 [Código aula](#Código-aula-02)
-- [1. Operações básicas](##1.-Operações-básicas)
-- [2. Imprimir na tela](##2.-Imprimir-na-tela)
-- [3. Executar funções](##3.-Executar-funções)
-- [4. Criar variáveis](##4.-Criar-variáveis)
-- [5. Criar funções](##5.-Criar-funções)
+- [1. Operações básicas](#1.-Operações-básicas)
+- [2. Imprimir na tela](#2.-Imprimir-na-tela)
+- [3. Executar funções](#3.-Executar-funções)
+- [4. Criar variáveis](#4.-Criar-variáveis)
+- [5. Criar funções](#5.-Criar-funções)
 
 
 [Exercícios](#Exercícios-02)
@@ -167,11 +167,11 @@ funcao()
 # Semana 03 - Condicionais no Python - Operadores e Sinais
 
 [Código aula](#Código-aula-03)
-- [Exemplo 1 - Avaliação econômica](##Exemplo-1---Avaliação-econômica)
+- [Exemplo 1 - Avaliação econômica](#Exemplo-1---Avaliação-econômica)
   - [1. Condicional if](#1-Condicional-if)
   - [2. Condicional if-else](#2-Condicional-if-else)
   - [3. Condicional if-elif-else](#3-Condicional-if-elif-else)
-- [Exemplo 2 - Decisão de expansão de área](##Exemplo-2---Decisão-de-expansão-de-área)
+- [Exemplo 2 - Decisão de expansão de área](#Exemplo-2---Decisão-de-expansão-de-área)
 
 
 [Exercícios](#Exercícios-03)
