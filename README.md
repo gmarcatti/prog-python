@@ -171,7 +171,7 @@ funcao()
   - [1. Condicional if](#1-Condicional-if)
   - [2. Condicional if-else](#2-Condicional-if-else)
   - [3. Condicional if-elif-else](#3-Condicional-if-elif-else)
-- [Exemplo 2 - Decisão de expansão de área](##Exemplo-2 --Decisão-de-expansão-de-área)
+- [Exemplo 2 - Decisão de expansão de área](##Exemplo-2---Decisão-de-expansão-de-área)
 
 
 [Exercícios](#Exercícios-03)
