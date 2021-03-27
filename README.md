@@ -28,9 +28,11 @@ Procedimentos apresentados na disciplina de Algoritmos e programação computaci
 
 [:arrow_left:](#Índice) [:arrow_up:](#Índice) [:arrow_right:](#Semana-03---Condicionais-no-Python---Operadores-e-Sinais)
 
-**Você irá aprender sobre os operadores condicionais e operadores de comparação. O primeiro corresponde à estrutura geral das operações de condição (Ex: if...else), já o segundo trata dos sinais utilizados para construir as operações de condição (Ex: > maior que, != diferente).**
+**Neste tópico você irá aprender a executar operações matemáticas básicas, criar variáveis, executar e criar suas próprias funções.**
 
-`As operações condicionais estão relacionadas com tomada de decisão entre diferentes alternativas, isto é, escolha de uma opção entre duas ou mais possibilidades.` Para ser capaz de compreender as operações condicionais é necessário entender pelo menos 4 temas: os operadores `condicionais`, operadores de `comparação`, operadores `lógicos` e operadores `condicionais aninhados`. Os dois primeiros serão apresentados no tópico atual e os dois últimos no tópico seguinte.
+O tempo todo no Python é necessário criar novas variáveis, elas serão úteis para armazenar resultados intermediários e até mesmo resultados finais.
+
+Uma das maiores potencialidades do Python é que ele permite ao usuário definir suas próprias funções de forma simples e fácil. Isso o torna uma ferramenta poderosa para criar e testar novas metodologias. No Python as funções apresentam papel de destaque, pois é uma das principais formas de interagir com as rotinas nativas da linguagem.
 
 [Código aula](#Código-aula-02)
 - [1. Operações básicas](#1-Operações-básicas)
@@ -182,6 +184,11 @@ funcao()
 
 [:arrow_left:](#Semana-02---Variáveis-e-Funções-no-Python) [:arrow_up:](#Índice) [:arrow_right:](#Semana-04---Condicionais-no-Python---Lógicas-e-Aninhamento)
 
+**Você irá aprender sobre os operadores condicionais e operadores de comparação. O primeiro corresponde à estrutura geral das operações de condição (Ex: if...else), já o segundo trata dos sinais utilizados para construir as operações de condição (Ex: > maior que, != diferente).**
+
+`As operações condicionais estão relacionadas com tomada de decisão entre diferentes alternativas, isto é, escolha de uma opção entre duas ou mais possibilidades.` Para ser capaz de compreender as operações condicionais é necessário estudar pelo menos 4 temas: os operadores `condicionais`, operadores de `comparação`, operadores `lógicos` e operadores `condicionais aninhados`. Os dois primeiros serão apresentados no tópico atual e os dois últimos no tópico seguinte.
+
+
 [Código aula](#Código-aula-03)
 - [Exemplo 1 - Avaliação econômica](#Exemplo-1---Avaliação-econômica)
   - [1. Condicional if](#1-Condicional-if)
@@ -305,6 +312,13 @@ exp_area(11000, 5000, 200)
 # Semana 04 - Condicionais no Python - Lógicas e Aninhamento
 
 [:arrow_left:](#Semana-03---Condicionais-no-Python---Operadores-e-Sinais) [:arrow_up:](#Índice) [:arrow_right:](#Semana-08---Estruturas-de-dados-no-Python)
+
+
+**Você irá aprender sobre os operadores lógicos, os representantes principais são o `ou` e `e`, representados pelas palavras reservadas `or` e `and`, ou então pelos símbolos `|` e `&`, respectivamente. Você também será apresentado aos condicionais aninhados, que podem ser utilizados para substituir um operador lógico. Um condicional aninhado, é basicamente, um operador condicional dentro do outro.**
+
+O operador `and` pode ser considerado mais restritivo, uma vez que só retorna verdadeiro se todas as expressões de condição forem verdadeiras. Já o operador `or` é considerado mais permissivo, pois basta uma expressão ser verdadeira para toda a condição retornar verdadeiro no final. A escolha do operador lógico, obviamente vai depender do problema em questão.
+
+Os operadores lógicos podem ser substituídos por operadores condicionais aninhados (ou encaixados). As vezes vale a pena recorrer a essas estruturas de condição por questões de simplificação. Com os condicionais aninhados o código pode ficar mais simples de implementar e entender.
 
 
 [Código aula](#Código-aula-03)
