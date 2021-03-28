@@ -278,7 +278,7 @@ else:
     print("Área de plantio em 2022 (100%):", area2022)
 ```
 
-`Criar função`
+> 1 - Criar função
 ```python
 def exp_area(receitas, custos, area_atual):
     prop = receitas / custos
@@ -296,7 +296,10 @@ def exp_area(receitas, custos, area_atual):
         area_prox = area_atual * 2
         print("Área de plantio em 2022 (100%):", area_prox)
     return(area_prox)
+```
 
+> 2 - Aplicar a função
+```python
 exp_area(4000, 5000, 200)
 exp_area(6000, 5000, 200)
 exp_area(9000, 5000, 200)
