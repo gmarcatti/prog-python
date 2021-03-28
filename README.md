@@ -96,7 +96,7 @@ nome = "Eduardo"
 
 ## Exemplo de boas vindas
 
-`1: Sem argumentos e sem retorno`
+> 1 - Sem argumentos e sem retorno
 ```python
 def boas_vindas1():
     print("Seja bem vindo!")
@@ -104,14 +104,14 @@ def boas_vindas1():
 boas_vindas1()
 ```
 
-`2: Com argumento`
+> 2 - Com argumento
 ```python
 def boas_vindas2(nome):
     print("Seja bem vindo", nome, "!")
 
 boas_vindas2("Fulano")
 ```
-`3: Com argumento padrão`
+> 3 - Com argumento padrão
 ```python
 def boas_vindas3(nome = "aluno"):
     print("Seja bem vindo", nome, "!")
@@ -122,7 +122,7 @@ boas_vindas3("Fulano")
 
 ## Exemplo análise econômica de projetos 
 
-`4: Com retorno`
+> 4 - Com retorno
 
 > Com repetição de código. Indesejável, pois é necessário muito código repetido
 
@@ -203,6 +203,7 @@ funcao()
 # Código aula 03
 
 ## Exemplo 1 - Avaliação econômica
+Identificar se o projeto retorna lucro, prejuízo ou nenhum dos dois, utilizando as informações de receitas e custos do projeto. 
 
 ### 1. Condicional if
 ```python
@@ -237,7 +238,7 @@ else:
     print("Projeto com Prejuízo de R$", abs(resultado))
 ```
 
-`Criar função`
+> 1 - Criar função
 ```python
 def aval_eco(receitas, custos):
     resultado = receitas - custos
@@ -248,7 +249,10 @@ def aval_eco(receitas, custos):
     else:
         print("Projeto com Prejuízo de R$", abs(resultado))
     return(resultado)
+```
 
+> 2 - Aplicar a função
+```python
 proj1 = aval_eco(9000, 5000)
 proj2 = aval_eco(5000, 5000)
 proj3 = aval_eco(4500, 5000)
@@ -258,6 +262,7 @@ print("Total R$", proj1 + proj2 +proj3)
 
 
 ## Exemplo 2 - Decisão de expansão de área
+Decidir qual deve ser a área de expansão de plantio de determinada cultura agrícola para o ano seguinte. A quantidade de expansão varia de acordo com o sucesso do ano atual. O sucesso é medido por uma proporção entre receita e custo da safra atual. As opções são: 0, 20, 50 e 100% de expansão.
 ```python
 receita = 14000
 custo = 6000
@@ -413,7 +418,7 @@ else:
 
 # Exemplo 2 - Condicional aninhado
 
-Definir ação controle de acordo com nível de infestação de uma praga
+Definir ação controle de acordo com nível de infestação de uma praga. As opções básicas são continuar com o programa atual, intensificar a amostragem, agir para controlar e não adianta fazer mais nada. Dentro da alternativa de intensificar temos 3 opções possíveis: repetir a amostragem a cada 4 dias, 2 dias e todos os dias
 
 > 1 - Criar função
 
@@ -453,7 +458,7 @@ for nivel in niveis:
     print("Para o nivel:", nivel)
     controle(nivel)
 ```
-Obs: Os processos de repetição em loop serão ensinado no próximo tema
+Obs: Os processos de repetição em loop serão ensinados no próximo tema
 
 ---
 
