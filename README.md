@@ -13,7 +13,7 @@ Procedimentos apresentados na disciplina de Algoritmos e programação computaci
 
 [Semana 08 - Estruturas de dados no Python](#Semana-08---Estruturas-de-dados-no-Python)
 
-
+[Semana 10 - Programação Funcional no Python](#Semana-10---Programação-Funcional-no-Python)
 
 ---
 
@@ -468,7 +468,7 @@ Obs: Os processos de repetição em loop serão ensinados no próximo tema
 
 # Semana 08 - Estruturas de dados no Python
 
-[:arrow_left:](#Semana-04---Condicionais-no-Python---Lógicas-e-Aninhamento) &nbsp; &nbsp; &nbsp; &nbsp; [:arrow_up:](#Índice) &nbsp; &nbsp; &nbsp; &nbsp; [:arrow_right:](#Índice)
+[:arrow_left:](#Semana-04---Condicionais-no-Python---Lógicas-e-Aninhamento) &nbsp; &nbsp; &nbsp; &nbsp; [:arrow_up:](#Índice) &nbsp; &nbsp; &nbsp; &nbsp; [:arrow_right:](#Semana-10---Programação-Funcional-no-Python)
 
 
 [Código aula](#Código-aula-08)
@@ -793,3 +793,245 @@ print("Cobertura total:", resumo.sum())
     Name: Atribuicao, dtype: float64
     Cobertura total: 76.0
     
+
+# Semana 10 - Programação Funcional no Python
+
+[:arrow_left:](#Semana-08---Estruturas-de-dados-no-Python) &nbsp; &nbsp; &nbsp; &nbsp; [:arrow_up:](#Índice) &nbsp; &nbsp; &nbsp; &nbsp; [:arrow_right:](#Índice)
+
+
+[Código aula](#Código-aula-10)
+- [Parte 1](#Parte-1)
+
+[Exercícios](#Exercícios-10)
+
+
+[Exercícios Extra](#Exercício-extra-10)
+- [Ajuste de regressão para grupos de dados](#Ajuste-de-regressão-para-grupos-de-dados)
+  - [Apresentação dos dados](#Apresentação-dos-dados)
+  - [1. Paradigma Imperativo](#1-Paradigma-Imperativo)
+  - [2. Paradigma Funcional](#2-Paradigma-Funcional)
+  - [3. Paradigma Vetorizado](#3-Paradigma-Vetorizado)
+
+# Código aula 10
+## Parte 1
+
+## Exercício 10
+
+# Exercício extra 10
+## Ajuste de regressão para grupos de dados
+
+Autor: Gustavo Eduardo Marcatti  
+03 de abril de 2021
+
+O exercício apresenta a solução para o ajuste de modelos de regressão linear para grupos de elementos, estes grupos estão reunidos em uma base de dados. Os grupos correspondem a estratos dos dados que compartilham de características semelhantes, como material genético, região, manejo, dentre outras. Os procedimentos desenvolvidos servem para ajustar um modelo de regressão linear simples (y = b0 + b1 * x), porém pode ser adaptado para o ajuste de outros modelos de regressão linear e até mesmo de regressão não linear. Três paradigmas de programação diferentes foram utilizadas para os ajustes: (1) Imperativo, (2) Funcional e (3) Vetorizado.
+
+Bibliotecas necessárias para o processamento
+
+```python
+import pandas as pd # Análises em data frame (quadro de dados)
+import numpy as np # Análises em array (matrizes)
+from scipy.sparse import hstack, csc_matrix, linalg # Análises em matrizes esparsas
+```
+
+Apresentação dos dados
+```python
+proj = [1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3] # código do projeto (grupo)
+x =    [1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4] # variável x
+y =    [1, 2, 2, 3, 8, 6, 5, 3, 2, 4, 5, 8, 9] # Variável y
+lista = zip(proj, x, y) # juntar as três listas de dados em uma lista única
+col = ['proj', 'x', 'y'] # nome das colunas da data frame
+dados = pd.DataFrame(lista, columns = col) # criar data frame com os dados
+dados # imprimir os dados na tela
+```
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>proj</th>
+      <th>x</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>3</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>1</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2</td>
+      <td>2</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2</td>
+      <td>5</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>3</td>
+      <td>1</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>3</td>
+      <td>2</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>3</td>
+      <td>3</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>3</td>
+      <td>4</td>
+      <td>9</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+## 1. Paradigma Imperativo
+O paradigma imperativo utiliza processo de repetição explícita com a estrutura de controle loop for. Os passos elementares são descritos a seguir:
+> 1 - Identificar os códigos únicos de projetos (grupos) disponíveis na base de dados  
+> 2 - Criar lista vazia para receber os valores dos parâmetros (ou coeficiêntes) do modelo  
+> 3 - Definir o loop for para controlar as repetições para cada projeto (grupo)
+> 4 - Filtrar os dados referentes apenas do projeto `i`  
+> 5 - Isolar a coluna referente à variável resposta `y`  
+> 6 - Criar matriz a `X` <sub>`m x n`</sub> em que `m` é o número de observações do grupo `i` e `n` é o número de coeficiêntes do modelo, neste caso a matriz `X` apresenta 2 colunas: variável explicativa `x` e coluna com valor constante, igual a 1, de modo que o primeiro corresponde ao coeficiente angular (b1) e o segundo ao coeficiente linear (b0).  
+> 7 - Ajustar o modelo `y = b0 + b1 * x`, utilizando a função [lstsq](https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html), de ajuste via minimos quadrados (least-squares) da biblioteca numpy.  
+> 8 - Armazenar os coeficientes do modelo, correspondente ao grupo `i`, na lista criada em (2).  
+> 9 - Salvar os coeficientes em uma data frame do pandas
+```python
+uni_id = dados['proj'].unique()
+coef = []
+for i in uni_id:
+    d_i = dados.loc[dados['proj'] == i]
+    y = d_i['y'].values
+    X = np.vstack([d_i['x'].values, np.ones(len(y))]).T
+    b1, b0 = np.linalg.lstsq(X, y, rcond=None)[0]
+    coef.append([i, b0, b1])
+
+col = ['proj', 'b0', 'b1']
+coef_imp = pd.DataFrame(coef, columns = col)
+coef_imp
+```
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>proj</th>
+      <th>b0</th>
+      <th>b1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0.5</td>
+      <td>0.6</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>9.3</td>
+      <td>-1.5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>2.0</td>
+      <td>1.8</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<br>
+<br>
+
+
+## 2. Paradigma Funcional
+
+O paradigma funcional utiliza processo de repetição implícita com a aplicação do método group_by seguido do apply, assim uma função previamente definida, para ajustar o modelo é aplicada repetidamente para cada grupo da base de dados. Esse procedimento pode ser conhecido como group-by ou split-apply-combine. Os passos elementares são descritos a seguir:
+
+<br>
+<br>
+
+
+## 3. Paradigma Vetorizado
