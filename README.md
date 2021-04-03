@@ -845,7 +845,6 @@ dados # imprimir os dados na tela
 ```
 
 <div>
-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -949,6 +948,7 @@ O paradigma imperativo utiliza processo de repetição explícita com a estrutur
 > 7 - Ajustar o modelo `y = b0 + b1 * x`, utilizando a função [lstsq](https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html), de ajuste via minimos quadrados (least-squares) da biblioteca numpy.  
 > 8 - Armazenar os coeficientes do modelo, correspondente ao grupo `i`, na lista criada em (2).  
 > 9 - Salvar os coeficientes em uma data frame do pandas
+
 ```python
 uni_id = dados['proj'].unique()
 coef = []
@@ -965,7 +965,6 @@ coef_imp
 ```
 
 <div>
-
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1006,8 +1005,68 @@ coef_imp
 
 O paradigma funcional utiliza processo de repetição implícita com a aplicação do método group_by seguido do apply, assim uma função previamente definida, para ajustar o modelo é aplicada repetidamente para cada grupo da base de dados. Esse procedimento pode ser conhecido como group-by ou split-apply-combine. Os passos elementares são descritos a seguir:
 
+> 1 - Criar função para o ajuste  
+> 1.1 - Isolar a coluna referente à variável resposta `y`  
+> 1.2 - Criar matriz a `X` <sub>`m x n`</sub> assim como descrito no paradigma imperativo  
+> 1.3 -  Ajustar o modelo `y = b0 + b1 * x`, utilizando a função [lstsq](https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html), como no paradigma imperativo  
+> 1.4 - Salvar os coeficientes (`b0` e `b1`) em uma data frame  
+> 2 - Em uma única linha de comando: subdividir os dados em grupos de acordo com a variável de interesse, neste caso com `proj`; aplicar a função ajuste, criada em 1, para cada um dos grupos
+```python
+def ajuste(df):
+    y = df['y'].values
+    X = np.vstack([df['x'].values, np.ones(len(y))]).T
+    b1, b0 = np.linalg.lstsq(X, y, rcond=None)[0]
+    return pd.DataFrame({'b0': [b0], 'b1': [b1]})
+
+coef_fun = dados.groupby('proj').apply(ajuste)
+coef_fun
+```
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>b0</th>
+      <th>b1</th>
+    </tr>
+    <tr>
+      <th>proj</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <th>0</th>
+      <td>0.5</td>
+      <td>0.6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <th>0</th>
+      <td>9.3</td>
+      <td>-1.5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <th>0</th>
+      <td>2.0</td>
+      <td>1.8</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 <br>
 <br>
 
 
 ## 3. Paradigma Vetorizado
+O paradigma vetorizado (ou matricial) também utiliza processo de repetição implícita, em que os dados são preparados para serem executados por funções vetorizadas, tais como as disponibilizadas nas bibliotecas pandas, numpy e scipy. Os passos elementares são descritos a seguir:
+
+
+
