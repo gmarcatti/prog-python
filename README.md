@@ -1146,9 +1146,10 @@ coef_vet
 </div>
 
 
-A figura abaixo apresenta uma ilustração da etapa de organização dos dados e o resultado do ajuste do modelo pela função [lsqr](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.lsqr.html).
+A figura abaixo apresenta uma ilustração da etapa de organização dos dados e o resultado do ajuste do modelo pela função [lsqr](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.lsqr.html).  
 
-![alt text](https://raw.githubusercontent.com/gmarcatti/prog-python/main/img/ml_vetorizado.png)
+![alt text](https://raw.githubusercontent.com/gmarcatti/prog-python/main/img/ml_vetorizado.png)  
+
 Obs: observe que a multiplicação da variável dummy pela coluna constante de 1's não é necessária, porém a etapa foi mantida na imagem e no código por questões de didática e pelo fato de não ser custosa computacionalmente.
 
 As variáveis dummy, assim como todo o processo vetorizado, deve ser feito utilizando matrizes esparsas. Esse tipo de representação é bastante no uso de memória, além disso, o modulo [sparse](https://docs.scipy.org/doc/scipy/reference/sparse.html) fornece funções especialmente desenvolvidas para trabalhar com matrizes enormes. A figura a seguir ilustra o efeito da quantidade de grupos na peformance de cada um dos paradigmas de programação. Quanto menor o tempo melhor.
