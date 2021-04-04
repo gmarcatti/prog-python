@@ -944,7 +944,7 @@ O paradigma imperativo utiliza processo de repetição explícita com a estrutur
 > 3 - Definir o loop for para controlar as repetições para cada projeto (grupo)
 > 4 - Filtrar os dados referentes apenas do projeto `i`  
 > 5 - Isolar a coluna referente à variável resposta `y`  
-> 6 - Criar matriz a `X` <sub>`m x n`</sub> em que `m` é o número de observações do grupo `i` e `n` é o número de coeficiêntes do modelo, neste caso a matriz `X` apresenta 2 colunas: variável explicativa `x` e coluna com valor constante, igual a 1, de modo que o primeiro corresponde ao coeficiente angular (b1) e o segundo ao coeficiente linear (b0).  
+> 6 - Criar matriz a `X` <sub>`n x m`</sub> em que `n` é o número de observações do grupo `i` e `m` é o número de coeficiêntes do modelo, neste caso a matriz `X` apresenta 2 colunas: variável explicativa `x` e coluna com valor constante, igual a 1, de modo que o primeiro corresponde ao coeficiente angular (b1) e o segundo ao coeficiente linear (b0).  
 > 7 - Ajustar o modelo `y = b0 + b1 * x`, utilizando a função [lstsq](https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html), de ajuste via minimos quadrados (least-squares) da biblioteca numpy.  
 > 8 - Armazenar os coeficientes do modelo, correspondente ao grupo `i`, na lista criada em (2).  
 > 9 - Salvar os coeficientes em uma data frame do pandas
@@ -1007,7 +1007,7 @@ O paradigma funcional utiliza processo de repetição implícita com a aplicaç�
 
 > 1 - Criar função para o ajuste  
 > 1.1 - Isolar a coluna referente à variável resposta `y`  
-> 1.2 - Criar matriz a `X` <sub>`m x n`</sub> assim como descrito no paradigma imperativo  
+> 1.2 - Criar matriz a `X` <sub>`n x m`</sub> assim como descrito no paradigma imperativo  
 > 1.3 -  Ajustar o modelo `y = b0 + b1 * x`, utilizando a função [lstsq](https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html), como no paradigma imperativo  
 > 1.4 - Salvar os coeficientes (`b0` e `b1`) em uma data frame  
 > 2 - Em uma única linha de comando: subdividir os dados em grupos de acordo com a variável de interesse, neste caso com `proj`; aplicar a função ajuste, criada em 1, para cada um dos grupos
@@ -1068,5 +1068,84 @@ coef_fun
 ## 3. Paradigma Vetorizado
 O paradigma vetorizado (ou matricial) também utiliza processo de repetição implícita, em que os dados são preparados para serem executados por funções vetorizadas, tais como as disponibilizadas nas bibliotecas pandas, numpy e scipy. Os passos elementares são descritos a seguir:
 
+Antes de inicializar o processo é necessário criar variáveis dummy em uma matriz esparsa, com objetivo de economizar memória no momento do ajuste. As variáveis dummy permitem o ajuste de para todos os grupos (proj) de forma separada em um único passo. A dummy é gerada no formato de matriz com n linhas, que correspondem à quantidade de observações totais e m colunas, que correspondem à quantidade de grupos para os ajustes, isto é, uma coluna para cada grupo. Deste modo é fácil notar a necessidade de executar os procedimentos utilizando matrizes esparças, pois a medida que a quantidade de grupos aumenta o tamanho desta matriz aumenta rapidamente. O suporte para matrizes esparsa pode ser encontrado na biblioteca scipy, no módulo [sparse](https://docs.scipy.org/doc/scipy/reference/sparse.html)
+
+```python
+def dummy01(classe):
+    unicos, idx = np.unique(classe, return_index = True)
+    n, m = len(classe), len(unicos)
+    id_arr = np.zeros(n, dtype=np.uint8)
+    id_arr[idx[1:]] = 1
+    csc_idx = (np.ones(n), (np.arange(n), id_arr.cumsum()))
+    return csc_matrix(csc_idx, shape=(n, m), dtype = np.uint8)
+
+print(dummy01(dados['proj'].values).todense())
+```
+   ```
+    [[1 0 0]
+     [1 0 0]
+     [1 0 0]
+     [1 0 0]
+     [0 1 0]
+     [0 1 0]
+     [0 1 0]
+     [0 1 0]
+     [0 1 0]
+     [0 0 1]
+     [0 0 1]
+     [0 0 1]
+     [0 0 1]] 
+```
+
+> 1 - Criar as variáveis dummy  
+> 2 - Isolar a coluna referente à variável resposta `y`   
+> 3 - Criar a matriz `X` <sub>`n x m`</sub> a partir da combinação por colunas da multiplicação das variáveis dummy pela variável explicativa `x` e multiplicação das variáveis dummy pela coluna constante, com valores iguais a 1. A matriz `X` apresenta `n` linhas (observações totais) e `m` colunas, que corresponde à quantidade de grupos * 2   
+> 4 -  Ajustar o modelo `y = b0 + b1 * x` de forma semelhante aos paradigmas anteriores, mas desta vez a função [lsqr](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.lsqr.html) será utilizada. Observe que está função pertence ao modulo sparse da scipy, e assim fornece suporte para matrizes esparsas   
+> 5 - Salvar os coeficientes em uma data frame do pandas
+
+```python
+dummy = dummy01(dados['proj'].values)
+y = dados['y'].values
+x = np.reshape(dados['x'].values, (-1 , 1))
+X = hstack((dummy.multiply(x), dummy.multiply(np.ones(x.shape))))
+b1, b0 = np.split(linalg.lsqr(X, y)[0], 2)
+coef_vet = pd.DataFrame({'proj': dados['proj'].unique(), 'b0': b0, 'b1': b1})
+coef_vet
+```
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>proj</th>
+      <th>b0</th>
+      <th>b1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0.5</td>
+      <td>0.6</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>9.3</td>
+      <td>-1.5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>2.0</td>
+      <td>1.8</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 
+A figura abaixo apresenta uma ilustração da etapa de organização dos dados e o resultado do ajuste do modelo pela função [lsqr](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.lsqr.html).
+
+![alt text](https://raw.githubusercontent.com/gmarcatti/prog-python/main/img/ml_vetorizado.png)
