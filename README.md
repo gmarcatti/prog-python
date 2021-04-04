@@ -800,9 +800,9 @@ print("Cobertura total:", resumo.sum())
 
 
 [Código aula](#Código-aula-10)
-- [Parte 1](#Parte-1)
 
-[Exercícios](#Exercícios-10)
+
+[Exercícios](#Exercício-10)
 
 
 [Exercícios Extra](#Exercício-extra-10)
@@ -813,7 +813,7 @@ print("Cobertura total:", resumo.sum())
   - [3. Paradigma Vetorizado](#3-Paradigma-Vetorizado)
 
 # Código aula 10
-## Parte 1
+
 
 ## Exercício 10
 
@@ -833,7 +833,7 @@ import numpy as np # Análises em array (matrizes)
 from scipy.sparse import hstack, csc_matrix, linalg # Análises em matrizes esparsas
 ```
 
-Apresentação dos dados
+## Apresentação dos dados
 ```python
 proj = [1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3] # código do projeto (grupo)
 x =    [1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4] # variável x
