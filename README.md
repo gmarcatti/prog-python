@@ -805,7 +805,7 @@ print("Cobertura total:", resumo.sum())
 [Exercícios](#Exercício-10)
 
 
-[Exercícios Extra](#Exercício-extra-10)
+[Exercício Extra](#Exercício-extra-10)
 - [Ajuste de regressão para grupos de dados](#Ajuste-de-regressão-para-grupos-de-dados)
   - [Apresentação dos dados](#Apresentação-dos-dados)
   - [1. Paradigma Imperativo](#1-Paradigma-Imperativo)
@@ -1071,7 +1071,7 @@ Antes de inicializar o processo é necessário criar variáveis dummy. As variá
 > 3 - Criar array de zeros com a mesma quantidade de elementos da quantidade de observações
 > 4 - Substituir 0 por 1 em cada local de mudança de grupo  
 > 5 - Criar os componentes básicos para construção da matriz de variáveis dummy: vetor de 1's (dados da matriz), vetor de índices de 0 a n (índices de linhas), e vetor com somatório acumulativo (índices de colunas)  
-> 6 - Criação propriamente dita da matriz dummy, utilizando a função csc_matrix [csc_matrix](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csc_matrix.html) do módulo [sparse](https://docs.scipy.org/doc/scipy/reference/sparse.html) da biblioteca [scipy](https://www.scipy.org/)
+> 6 - Criação propriamente dita da matriz dummy, utilizando a função [csc_matrix](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csc_matrix.html) do módulo [sparse](https://docs.scipy.org/doc/scipy/reference/sparse.html) da biblioteca [scipy](https://www.scipy.org/)
 
 ```python
 def dummy01(classe):
