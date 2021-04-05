@@ -937,6 +937,7 @@ dados # imprimir os dados na tela
 </table>
 </div>
 
+
 ## 1. Paradigma Imperativo
 O paradigma imperativo utiliza processo de repetição explícita com a estrutura de controle loop for. Os passos elementares são descritos a seguir:
 > 1 - Identificar os códigos únicos de projetos (grupos) disponíveis na base de dados  
@@ -1010,7 +1011,8 @@ O paradigma funcional utiliza processo de repetição implícita com a aplicaç�
 > 1.2 - Criar matriz a `X` <sub>`n x m`</sub> assim como descrito no paradigma imperativo  
 > 1.3 -  Ajustar o modelo `y = b0 + b1 * x`, utilizando a função [lstsq](https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html), como no paradigma imperativo  
 > 1.4 - Salvar os coeficientes (`b0` e `b1`) em uma data frame  
-> 2 - Em uma única linha de comando: subdividir os dados em grupos de acordo com a variável de interesse, neste caso com `proj`; aplicar a função ajuste, criada em 1, para cada um dos grupos
+> 2 - Em uma única linha de comando: subdividir os dados em grupos de acordo com a variável de interesse, neste caso com `proj`; aplicar a função ajuste, criada em 1, para cada um dos grupos  
+> 3 - Resetar índice da data frame (transformar código do grupo de índice para coluna) e remover a coluna level_1 (derivada da criação da data frame no função). Estes comandos servem para gerar uma solução exatamente igual em todos os paradigmas
 ```python
 def ajuste(df):
     y = df['y'].values
@@ -1019,6 +1021,7 @@ def ajuste(df):
     return pd.DataFrame({'b0': [b0], 'b1': [b1]})
 
 coef_fun = dados.groupby('proj').apply(ajuste)
+coef_fun = coef_fun.reset_index().drop('level_1', axis = 1)
 coef_fun
 ```
 <div>
@@ -1026,33 +1029,27 @@ coef_fun
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th></th>
+      <th>proj</th>
       <th>b0</th>
       <th>b1</th>
-    </tr>
-    <tr>
-      <th>proj</th>
-      <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>1</th>
       <th>0</th>
+      <td>1</td>
       <td>0.5</td>
       <td>0.6</td>
     </tr>
     <tr>
-      <th>2</th>
-      <th>0</th>
+      <th>1</th>
+      <td>2</td>
       <td>9.3</td>
       <td>-1.5</td>
     </tr>
     <tr>
-      <th>3</th>
-      <th>0</th>
+      <th>2</th>
+      <td>3</td>
       <td>2.0</td>
       <td>1.8</td>
     </tr>
@@ -1069,6 +1066,12 @@ coef_fun
 O paradigma vetorizado (ou matricial) também utiliza processo de repetição implícita, em que os dados são preparados para serem executados por funções vetorizadas, tais como as disponibilizadas nas bibliotecas pandas, numpy e scipy. Os passos elementares são descritos a seguir:
 
 Antes de inicializar o processo é necessário criar variáveis dummy. As variáveis dummy permitem o ajuste de um modelo para cada grupo (proj) em um único passo. A dummy é gerada no formato de matriz com n linhas, que correspondem à quantidade de observações totais e m colunas, que correspondem à quantidade de grupos, isto é, uma coluna para cada grupo. 
+> 1 - Criar valores únicos dos códigos dos grupos, bem como os índices de início de cada grupo  
+> 2 - Obter a quantidade de observações (n) e quantidade de grupos (m)   
+> 3 - Criar array de zeros com a mesma quantidade de elementos da quantidade de observações
+> 4 - Substituir 0 por 1 em cada local de mudança de grupo  
+> 5 - Criar os componentes básicos para construção da matriz de variáveis dummy: vetor de 1's (dados da matriz), vetor de índices de 0 a n (índices de linhas), e vetor com somatório acumulativo (índices de colunas)  
+> 6 - Criação propriamente dita da matriz dummy, utilizando a função csc_matrix [csc_matrix](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csc_matrix.html) do módulo [sparse](https://docs.scipy.org/doc/scipy/reference/sparse.html) da biblioteca [scipy](https://www.scipy.org/)
 
 ```python
 def dummy01(classe):
@@ -1097,17 +1100,19 @@ print(dummy01(dados['proj'].values).todense())
      [0 0 1]] 
 ```
 
-> 1 - Criar as variáveis dummy  
-> 2 - Isolar a coluna referente à variável resposta `y`   
-> 3 - Criar a matriz `X` <sub>`n x m`</sub> a partir da combinação por colunas da multiplicação das variáveis dummy pela variável explicativa `x` e multiplicação das variáveis dummy pela coluna constante, com valores iguais a 1. A matriz `X` apresenta `n` linhas (observações totais) e `m` colunas, que corresponde à quantidade de grupos * 2   
-> 4 -  Ajustar o modelo `y = b0 + b1 * x` de forma semelhante aos paradigmas anteriores, mas desta vez a função [lsqr](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.lsqr.html) será utilizada. Observe que está função pertence ao modulo sparse da scipy, e assim fornece suporte para matrizes esparsas   
-> 5 - Salvar os coeficientes em uma data frame do pandas
+> 1 - Ordenar os dados pela coluna de grupos. Essa etapa é necessária para construção de forma correta da matriz de variáveis dummy. O argumento inplace foi utilizado, que indica para a função de ordenação que o resultado deve substituir os dados originais.  
+> 2 - Criar as variáveis dummy  
+> 3 - Isolar a coluna referente à variável resposta `y`   
+> 4 - Criar a matriz `X` <sub>`n x m`</sub> a partir da combinação por colunas da multiplicação das variáveis dummy pela variável explicativa `x` e multiplicação das variáveis dummy pela coluna constante, com valores iguais a 1. A matriz `X` apresenta `n` linhas (observações totais) e `m` colunas, que corresponde à quantidade de grupos * 2   
+> 5 -  Ajustar o modelo `y = b0 + b1 * x` de forma semelhante aos paradigmas anteriores, mas desta vez a função [lsqr](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.lsqr.html) será utilizada. Observe que está função pertence ao modulo sparse da scipy, e assim fornece suporte para matrizes esparsas   
+> 6 - Salvar os coeficientes em uma data frame do pandas
 
 ```python
+dados.sort_values('proj', inplace = True) # ordenar por grupos
 dummy = dummy01(dados['proj'].values)
 y = dados['y'].values
 x = np.reshape(dados['x'].values, (-1 , 1))
-X = hstack((dummy.multiply(x), dummy.multiply(np.ones(x.shape))))
+X = hstack((dummy.multiply(x), dummy))
 b1, b0 = np.split(linalg.lsqr(X, y)[0], 2)
 coef_vet = pd.DataFrame({'proj': dados['proj'].unique(), 'b0': b0, 'b1': b1})
 coef_vet
@@ -1150,7 +1155,8 @@ A figura abaixo apresenta uma ilustração da etapa de organização dos dados e
 
 ![alt text](https://raw.githubusercontent.com/gmarcatti/prog-python/main/img/ml_vetorizado.png)  
 
-Obs: observe que a multiplicação da variável dummy pela coluna constante de 1's não é necessária, porém a etapa foi mantida na imagem e no código por questões de didática e pelo fato de não ser custosa computacionalmente.
+Obs 1: observe que a multiplicação da variável dummy pela coluna constante de 1's não é necessária, porém a etapa foi mantida na imagem por questões de didática.  
+Obs 2: observe que as matrizes `Dummy` e `x` apresentam dimensões diferentes: `Dummy` <sub>`13 x 3`</sub> e `x` <sub>`13 x 1`</sub> , mesmo assim a operação de multiplicação pode ser executada, isso é possível devido à numpy transmitir a matriz `x` para cada uma das 3 colunas de `Dummy`. Essa operação recebe o nome de [broadcasting](https://numpy.org/doc/stable/user/basics.broadcasting.html), que além de simplificar o código, evita cópias desnecessárias dos dados.
 
-As variáveis dummy, assim como todo o processo vetorizado, deve ser feito utilizando matrizes esparsas. Esse tipo de representação é bastante no uso de memória, além disso, o modulo [sparse](https://docs.scipy.org/doc/scipy/reference/sparse.html) fornece funções especialmente desenvolvidas para trabalhar com matrizes enormes. A figura a seguir ilustra o efeito da quantidade de grupos na peformance de cada um dos paradigmas de programação. Quanto menor o tempo melhor.
+As variáveis dummy, assim como todo o processo vetorizado, deve ser feito utilizando matrizes esparsas. Esse tipo de representação é econômico no uso de memória, além disso, o modulo [sparse](https://docs.scipy.org/doc/scipy/reference/sparse.html) fornece funções especialmente desenvolvidas para trabalhar com matrizes enormes representas de forma esparsa. A figura a seguir ilustra o efeito da quantidade de grupos na performance (tempo de processamento) de cada um dos paradigmas de programação. Quanto menor o tempo melhor.
 ![alt text](https://raw.githubusercontent.com/gmarcatti/prog-python/main/img/imp_fun_vet.png)
