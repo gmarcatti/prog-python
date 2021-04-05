@@ -1117,6 +1117,7 @@ b1, b0 = np.split(linalg.lsqr(X, y)[0], 2)
 coef_vet = pd.DataFrame({'proj': dados['proj'].unique(), 'b0': b0, 'b1': b1})
 coef_vet
 ```
+
 <div>
 <table border="1" class="dataframe">
   <thead>
@@ -1150,6 +1151,12 @@ coef_vet
 </table>
 </div>
 
+<br>
+Avaliação do ajuste pode ser feita com a função assert_array_almost_equal, que retorna erro se os dados forem diferentes de acordo com a especifícação da quantidade de casas decimais.  
+
+```python
+np.testing.assert_array_almost_equal(coef_vet.values, coef_fun.values, decimal=12)
+```
 
 A figura abaixo apresenta uma ilustração da etapa de organização dos dados e o resultado do ajuste do modelo pela função [lsqr](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.lsqr.html).  
 
