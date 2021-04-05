@@ -1068,7 +1068,7 @@ O paradigma vetorizado (ou matricial) também utiliza processo de repetição im
 Antes de inicializar o processo é necessário criar variáveis dummy. As variáveis dummy permitem o ajuste de um modelo para cada grupo (proj) em um único passo. A dummy é gerada no formato de matriz com n linhas, que correspondem à quantidade de observações totais e m colunas, que correspondem à quantidade de grupos, isto é, uma coluna para cada grupo. 
 > 1 - Criar valores únicos dos códigos dos grupos, bem como os índices de início de cada grupo  
 > 2 - Obter a quantidade de observações (n) e quantidade de grupos (m)   
-> 3 - Criar array de zeros com a mesma quantidade de elementos da quantidade de observações
+> 3 - Criar array de zeros com a mesma quantidade de elementos da quantidade de observações  
 > 4 - Substituir 0 por 1 em cada local de mudança de grupo   
 > 5 - Criar os componentes básicos para construção da matriz de variáveis dummy: vetor de 1's (dados da matriz), vetor de índices de 0 a n (índices de linhas), e vetor com somatório acumulativo (índices de colunas)  
 > 6 - Criação propriamente dita da matriz dummy, utilizando a função [csc_matrix](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csc_matrix.html) do módulo [sparse](https://docs.scipy.org/doc/scipy/reference/sparse.html) da biblioteca [scipy](https://www.scipy.org/)
