@@ -940,26 +940,25 @@ dados # imprimir os dados na tela
 
 ## 1. Paradigma Imperativo
 O paradigma imperativo utiliza processo de repetição explícita com a estrutura de controle loop for. Os passos elementares são descritos a seguir:
-> 1 - Identificar os códigos únicos de projetos (grupos) disponíveis na base de dados  
+> 1 - Ordenar dados pelos grupos (proj) de interesse  
 > 2 - Criar lista vazia para receber os valores dos parâmetros (ou coeficiêntes) do modelo  
-> 3 - Definir o loop for para controlar as repetições para cada projeto (grupo)
-> 4 - Filtrar os dados referentes apenas do projeto `i`  
-> 5 - Isolar a coluna referente à variável resposta `y`  
-> 6 - Criar matriz a `X` <sub>`n x m`</sub> em que `n` é o número de observações do grupo `i` e `m` é o número de coeficiêntes do modelo, neste caso a matriz `X` apresenta 2 colunas: variável explicativa `x` e coluna com valor constante, igual a 1, de modo que o primeiro corresponde ao coeficiente angular (b1) e o segundo ao coeficiente linear (b0).  
-> 7 - Ajustar o modelo `y = b0 + b1 * x`, utilizando a função [lstsq](https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html), de ajuste via minimos quadrados (least-squares) da biblioteca numpy.  
-> 8 - Armazenar os coeficientes do modelo, correspondente ao grupo `i`, na lista criada em (2).  
-> 9 - Salvar os coeficientes em uma data frame do pandas
+> 3 - Definir o loop for para controlar as repetições para cada projeto (grupo). Os grupos são gerados pela aplicação da função [groupby](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html) da biblioteca [itertools](https://docs.python.org/3/library/itertools.html) a partir da combinação dos dados de colunas em linhas pela função `zip`
+> 4 - Obter cada coluna de interesse dos dados para o grupo `k`, a partir da aplicação do inverso da função `zip`
+> 5 - Criar matriz a `X` <sub>`n x m`</sub> em que `n` é o número de observações do grupo `k` e `m` é o número de coeficiêntes do modelo, neste caso a matriz `X` apresenta 2 colunas: variável explicativa `x` e coluna com valor constante, igual a 1, de modo que o primeiro corresponde ao coeficiente angular (b1) e o segundo ao coeficiente linear (b0).  
+> 6 - Ajustar o modelo `y = b0 + b1 * x`, utilizando a função [lstsq](https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html), de ajuste via minimos quadrados (least-squares) da biblioteca numpy.  
+> 7 - Armazenar os coeficientes do modelo, correspondente ao grupo `k`, na lista criada em (2).  
+> 8 - Salvar os coeficientes em uma data frame do pandas
 
 ```python
-uni_id = dados['proj'].unique()
+from itertools import groupby
+from operator import itemgetter
+d.sort_values('proj', inplace = True) # ordenar por grupos
 coef = []
-for i in uni_id:
-    d_i = dados.loc[dados['proj'] == i]
-    y = d_i['y'].values
-    X = np.vstack([d_i['x'].values, np.ones(len(y))]).T
+for k, g in groupby(zip(d['proj'], d['x'], d['y']), key=itemgetter(0)):
+    proj, x, y = zip(*g)
+    X = np.vstack([x, np.ones(len(y))]).T
     b1, b0 = np.linalg.lstsq(X, y, rcond=None)[0]
-    coef.append([i, b0, b1])
-
+    coef.append([k, b0, b1])
 col = ['proj', 'b0', 'b1']
 coef_imp = pd.DataFrame(coef, columns = col)
 coef_imp
@@ -997,6 +996,11 @@ coef_imp
   </tbody>
 </table>
 </div>
+
+<br>   
+
+
+Vale apena pesquisar mais sobre a função [groupby](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html) da biblioteca [itertools](https://docs.python.org/3/library/itertools.html), essa biblioteca já vêm com a instalação padrão do Python, e apresenta uma série de outras funções que podem ser extremamente úteis para automatizar tarefas.
 
 <br>
 <br>
@@ -1057,7 +1061,13 @@ coef_fun
 </table>
 </div>
 
+<br>
 
+ A [groupby](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html) da biblioteca [pandas](https://pandas.pydata.org/)  geralmente é utilizada como etapa prévia da operação apply, porém pode ser perfeitamente utilizada para executar procedimentos em um loop for, em algumas situações pode até apresentar performance superior a sua utilização convencional: [groupby-apply](https://pandas.pydata.org/docs/user_guide/groupby.html), especialmente para funções que são definidas pelo usuário. O método [groupby](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html) retorna um iterator que possibilita acessar o `k` nome do grupo e o `g` grupo de dados. O código apresenta um loop for em um processo de repetição para imprimir os dados na tela.
+```python
+for k, g in d.groupby('proj'):
+    print('\n Grupo:', k, '\n', g)
+```
 <br>
 <br>
 
@@ -1168,4 +1178,4 @@ Obs 2: observe que as matrizes `Dummy` e `x` apresentam dimensões diferentes: `
 As variáveis dummy, assim como todo o processo vetorizado, deve ser feito utilizando matrizes esparsas. Esse tipo de representação é econômico no uso de memória, além disso, o modulo [sparse](https://docs.scipy.org/doc/scipy/reference/sparse.html) fornece funções especialmente desenvolvidas para trabalhar com matrizes enormes representas de forma esparsa. A figura a seguir ilustra o efeito da quantidade de grupos na performance (tempo de processamento) de cada um dos paradigmas de programação. Quanto menor o tempo melhor.
 ![alt text](https://raw.githubusercontent.com/gmarcatti/prog-python/main/img/imp_fun_vet.png)
 
-Obs: Apenas as soluções destacadas com setas são apresentadas no documento. Vale apena pesquisar mais sobre a função [groupby](https://docs.python.org/3/library/itertools.html#itertools.groupby) da biblioteca [itertools](https://docs.python.org/3/library/itertools.html), essa biblioteca já vêm com a instalação padrão do Python, e apresenta uma série de outras funções que podem ser extremamente úteis.  A [groupby](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html) da biblioteca pandas geralmente é utilizada como etapa prévia da operação apply, porém pode ser perfeitamente utilizada para executar procedimentos em um loop for, em algumas situações pode até apresentar performance superior a sua utilização convencional: [groupby-apply](https://pandas.pydata.org/docs/user_guide/groupby.html), especialmente para funções que são definidas pelo usuário.
+Obs: Apenas as soluções destacadas com setas são apresentadas no documento.  
